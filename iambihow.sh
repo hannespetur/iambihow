@@ -58,10 +58,12 @@ iambihow_status(){
     #find .iambihow/staging_area/ -maxdepth 1 | grep -v 'iambihow/staging_area/'
 
     echo ""
-    echo "Stuff in history at HEAD"
+    echo "Stuff in history (at HEAD)"
     find .iambihow/HEAD/ -maxdepth 1 | grep -v '^\.iambihow/HEAD/$'
 
+    echo ""
     echo "Stuff in working directory that is different from the staging area."
+    rsync -avunc .iambihow/staging_area/ .iambihow/HEAD/ | tail -n +3 | head -n -3
 
     echo ""
     echo "Stuff in staged area that is different from the history."
